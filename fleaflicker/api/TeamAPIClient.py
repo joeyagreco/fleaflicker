@@ -20,3 +20,15 @@ class TeamAPIClient(FleaflickerAPIClient):
         url = f"{cls._BASE_URL}{cls._ROSTER_ROUTE}"
         url = cls._add_filters(url, *filters)
         return cls._get(url=url)
+
+    @classmethod
+    def get_team_picks(cls,
+                       *,
+                       sport: Sport = Sport.NFL,
+                       league_id: int,
+                       team_id: int = None) -> dict:
+        filters = [("sport", sport.name), ("league_id", league_id)]
+        cls._add_filter_if_given("team_id", team_id, filters)
+        url = f"{cls._BASE_URL}{cls._TEAM_PICKS_ROUTE}"
+        url = cls._add_filters(url, *filters)
+        return cls._get(url=url)
