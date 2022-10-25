@@ -19,6 +19,7 @@ class FleaflickerAPIClient(ABC):
     _LEAGUE_DRAFT_BOARD_ROUTE = ConfigReader.get("api", "LEAGUE_DRAFT_BOARD_ROUTE")
     _LEAGUE_ROSTERS_ROUTE = ConfigReader.get("api", "LEAGUE_ROSTERS_ROUTE")
     _LEAGUE_RULES_ROUTE = ConfigReader.get("api", "LEAGUE_RULES_ROUTE")
+    _LEAGUE_SCOREBOARD_ROUTE = ConfigReader.get("api", "LEAGUE_SCOREBOARD_ROUTE")
 
     @classmethod
     def _build_route(cls, base_url: str, *args) -> str:

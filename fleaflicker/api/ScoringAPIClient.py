@@ -26,3 +26,17 @@ class ScoringAPIClient(FleaflickerAPIClient):
         url = f"{cls._BASE_URL}{cls._LEAGUE_RULES_ROUTE}"
         url = cls._add_filters(url, *filters)
         return cls._get(url=url)
+
+    @classmethod
+    def get_league_scoreboard(cls,
+                              *,
+                              sport: Sport = Sport.NFL,
+                              league_id: int,
+                              season: int = None,
+                              scoring_period: int = None) -> dict:
+        filters = [("sport", sport.name), ("league_id", league_id)]
+        cls._add_filter_if_given("season", season, filters)
+        cls._add_filter_if_given("scoring_period", scoring_period, filters)
+        url = f"{cls._BASE_URL}{cls._LEAGUE_SCOREBOARD_ROUTE}"
+        url = cls._add_filters(url, *filters)
+        return cls._get(url=url)
