@@ -26,3 +26,19 @@ class LeagueInfoAPIClient(FleaflickerAPIClient):
         url = f"{cls._BASE_URL}{cls._LEAGUE_DRAFT_BOARD_ROUTE}"
         url = cls._add_filters(url, *filters)
         return cls._get(url=url)
+
+    @classmethod
+    def get_league_rosters(cls,
+                           *,
+                           sport: Sport = Sport.NFL,
+                           league_id: int,
+                           season: int = None,
+                           scoring_period: int = None,
+                           external_id_type: list[str] = None) -> dict:
+        filters = [("sport", sport.name), ("league_id", league_id)]
+        cls._add_filter_if_given("season", season, filters)
+        cls._add_filter_if_given("scoring_period", scoring_period, filters)
+        cls._add_filter_if_given("external_id_type", external_id_type, filters, parse_value_as_list=True)
+        url = f"{cls._BASE_URL}{cls._LEAGUE_ROSTERS_ROUTE}"
+        url = cls._add_filters(url, *filters)
+        return cls._get(url=url)
