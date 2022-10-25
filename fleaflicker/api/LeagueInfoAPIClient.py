@@ -42,3 +42,15 @@ class LeagueInfoAPIClient(FleaflickerAPIClient):
         url = f"{cls._BASE_URL}{cls._LEAGUE_ROSTERS_ROUTE}"
         url = cls._add_filters(url, *filters)
         return cls._get(url=url)
+
+    @classmethod
+    def get_league_standings(cls,
+                             *,
+                             sport: Sport = Sport.NFL,
+                             league_id: int,
+                             season: int = None) -> dict:
+        filters = [("sport", sport.name), ("league_id", league_id)]
+        cls._add_filter_if_given("season", season, filters)
+        url = f"{cls._BASE_URL}{cls._LEAGUE_STANDINGS_ROUTE}"
+        url = cls._add_filters(url, *filters)
+        return cls._get(url=url)
