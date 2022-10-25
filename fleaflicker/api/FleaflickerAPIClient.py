@@ -16,6 +16,7 @@ class FleaflickerAPIClient(ABC):
     # ROUTES
     _LEAGUE_ACTIVITY_ROUTE = ConfigReader.get("api", "LEAGUE_ACTIVITY_ROUTE")
     _LEAGUE_BOXSCORE_ROUTE = ConfigReader.get("api", "LEAGUE_BOXSCORE_ROUTE")
+    _LEAGUE_DRAFT_BOARD_ROUTE = ConfigReader.get("api", "LEAGUE_DRAFT_BOARD_ROUTE")
 
     @classmethod
     def _build_route(cls, base_url: str, *args) -> str:
@@ -36,12 +37,17 @@ class FleaflickerAPIClient(ABC):
         return url
 
     @staticmethod
-    def _add_filter_if_given(key: str, value: Optional[Any], filter_list: list[tuple[str, Any]]):
+    def _add_filter_if_given(key: str, value: Optional[Any], filter_list: list[tuple[str, Any]], **kwargs):
         """
         Helper method for adding filters.
         """
+        parse_value_as_list: bool = kwargs.pop("parse_value_as_list", False)
         if value is not None:
-            filter_list.append((key, value))
+            if parse_value_as_list is True:
+                for v in value:
+                    filter_list.append((key, v))
+            else:
+                filter_list.append((key, value))
 
     @staticmethod
     def _get(url: str) -> dict:
