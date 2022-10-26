@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/joeyagreco/sleeper/raw/main/img/sleeper_logo_alt.png" alt="sleeper logo" width="250"/>
+<img src="https://raw.githubusercontent.com/joeyagreco/fleaflicker/main/img/ff_final.png" alt="fleaflicker logo" width="250"/>
 
 A Python wrapper for the Fleaflicker API.
 
