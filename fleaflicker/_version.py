@@ -1,4 +1,4 @@
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 # minimum supported Python version
 __version_minimum_python__ = "3.10"

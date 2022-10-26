@@ -26,5 +26,6 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=("test", "docs")),
     install_requires=required_packages,
     python_requires=f">={minimum_python_version_required}",
+    include_package_data=True,
     keywords="fleaflicker api wrapper api-wrapper fantasy"
 )
